@@ -1,0 +1,55 @@
+# Unity-generated directories
+.utmp/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Local builds
+/[Bb]uild/
+/[Bb]uilds/
+*.apk
+*.aab
+*.app
+*.unitypackage
+*.unitypackage.meta
+
+# IDE-generated files
+.vs/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.tmp
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.DotSettings.user
+
+# Crash and diagnostic files
+*.log
+sysinfo.txt
+mono_crash.*
+
+# Generated editor integrations
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Generated Unity caches
+/[Aa]ssets/Unity.VisualScripting.Generated/
+/[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Local tools and macOS
+.serena/
+.DS_Store
+
