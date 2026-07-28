@@ -98,8 +98,8 @@ public class FPSCounter : MonoBehaviour
 
     private void CreateFPSText()
     {
-        // Ищем любой активный Canvas в сцене
-        Canvas canvas = FindObjectOfType<Canvas>();
+        // Ищем первый активный Canvas в сцене
+        Canvas canvas = FindFirstObjectByType<Canvas>();
 
         if (canvas == null)
         {
