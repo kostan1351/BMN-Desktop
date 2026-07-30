@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody))]
 public class FlyingController : MonoBehaviour
 {
+    private const string MainMenuSceneName = "0-MainScence";
+
     public float flySpeed = 10f;
     public float speedMultiplier = 2f;
     public float mouseSensitivity = 2f;
@@ -44,7 +46,7 @@ public class FlyingController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(MainMenuSceneName);
             return;
         }
 

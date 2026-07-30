@@ -12,6 +12,9 @@ using UnityEngine.SceneManagement; // Для загрузки сцен
 
 public class MainMenu : MonoBehaviour
 {
+    private const string SettingsSceneName = "1-SettingsScene";
+    private const string SampleSceneName = "2-SampleScene";
+
     // ===== МЕТОДЫ =====
 
     void Start()
@@ -29,20 +32,17 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         // SceneManager.LoadScene() - загружает сцену по индексу или имени
-        // 2 - индекс сцены в Build Settings (0=главное меню, 1=настройки, 2=игра)
-        // Как в Python: scene_manager.load_scene(2)
-        SceneManager.LoadScene(2);
-        
-        // Альтернативная версия - загрузить по имени сцены:
-        // SceneManager.LoadScene("GameScene");
+        // Загружаем игровую сцену по имени, поэтому её порядок в Build Settings не важен
+        // Как в Python: scene_manager.load_scene("2-SampleScene")
+        SceneManager.LoadScene(SampleSceneName);
     }
 
     // ===== МЕТОД SETTINGSGAME =====
     // Этот метод вызывается при нажатии кнопки "Settings" в меню
     public void SettingsGame()
     {
-        // Загружаем сцену с индексом 1 (это сцена настроек)
-        SceneManager.LoadScene(1);
+        // Загружаем сцену настроек по имени
+        SceneManager.LoadScene(SettingsSceneName);
     }
 
     // ===== МЕТОД EXITGAME =====

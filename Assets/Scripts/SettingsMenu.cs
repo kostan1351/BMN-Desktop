@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement; // Для загрузки сцен
 
 public class SettingsMenu : MonoBehaviour
 {
+    private const string MainMenuSceneName = "0-MainScence";
+
     // ===== МЕТОДЫ =====
     
     // ===== МЕТОД RETURNTOMAINMENU =====
@@ -19,10 +21,9 @@ public class SettingsMenu : MonoBehaviour
     // Этот метод вызывается при нажатии кнопки "Return" в меню настроек
     public void ReturnToMainMenu()
     {
-        // SceneManager.LoadScene() - загружает сцену по индексу
-        // 0 - индекс главного меню в Build Settings
+        // SceneManager.LoadScene() загружает сцену по имени
         // Это вернёт игрока на главное меню
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MainMenuSceneName);
     }
     
     // ===== СПРАВКА =====
