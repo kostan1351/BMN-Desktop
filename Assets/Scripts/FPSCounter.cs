@@ -14,9 +14,9 @@ public class FPSCounter : MonoBehaviour
     [SerializeField] private float updateInterval = 0.5f; // Как часто обновлять текст (в секундах)
 
     // Приватные переменные для расчёта
-    private float deltaTime = 0f;
-    private float updateTimer = 0f;
-    private int frameCount = 0;
+    private float elapsedTime;
+    private int frameCount;
+    private bool isVisible;
 
     // ===== ЖИЗНЕННЫЙ ЦИКЛ =====
 
@@ -30,7 +30,7 @@ public class FPSCounter : MonoBehaviour
 
         if (fpsText != null)
         {
-            fpsText.color = textColor;
+            ConfigureText();
         }
 
         // Применяем начальное состояние сразу при старте
@@ -56,41 +56,48 @@ public class FPSCounter : MonoBehaviour
     /// </summary>
     private void UpdateVisibility(bool isEnabled)
     {
+        isVisible = isEnabled;
+
         if (fpsText != null)
         {
             fpsText.gameObject.SetActive(isEnabled);
+
+            if (isEnabled)
+            {
+                fpsText.text = "FPS: --";
+            }
         }
 
-        // КЛЮЧЕВАЯ ОПТИМИЗАЦИЯ: 
-        // Если FPS не нужен, мы отключаем сам этот скрипт.
-        // Метод Update() перестанет вызываться, экономя ресурсы процессора.
-        this.enabled = isEnabled;
+        // Сбрасываем накопленные данные, чтобы после включения не показывалось старое значение.
+        elapsedTime = 0f;
+        frameCount = 0;
     }
 
     // ===== РАСЧЁТ FPS =====
 
     private void Update()
     {
-        // Этот код выполняется ТОЛЬКО если this.enabled == true
+        if (!isVisible)
+        {
+            return;
+        }
 
-        deltaTime += Time.unscaledDeltaTime;
+        elapsedTime += Time.unscaledDeltaTime;
         frameCount++;
-        updateTimer += Time.unscaledDeltaTime;
 
         // Обновляем текст только когда прошел заданный интервал
-        if (updateTimer >= updateInterval)
+        if (elapsedTime >= Mathf.Max(0.1f, updateInterval))
         {
-            float fps = frameCount / deltaTime;
+            int fps = Mathf.RoundToInt(frameCount / elapsedTime);
 
             if (fpsText != null)
             {
-                fpsText.text = $"FPS: {fps:F1}";
+                fpsText.text = $"FPS: {fps}";
             }
 
             // Сброс счётчиков
             frameCount = 0;
-            deltaTime = 0f;
-            updateTimer = 0f;
+            elapsedTime = 0f;
         }
     }
 
@@ -113,19 +120,22 @@ public class FPSCounter : MonoBehaviour
 
         // Добавляем компоненты
         fpsText = fpsObject.AddComponent<TextMeshProUGUI>();
-        RectTransform rectTransform = fpsObject.GetComponent<RectTransform>();
+    }
 
-        // Настраиваем внешний вид
-        fpsText.fontSize = 36;
-        fpsText.alignment = TextAlignmentOptions.BottomLeft;
-        fpsText.text = "FPS: 0";
+    private void ConfigureText()
+    {
         fpsText.color = textColor;
+        fpsText.fontSize = 36;
+        fpsText.alignment = TextAlignmentOptions.TopRight;
+        fpsText.raycastTarget = false;
+        fpsText.text = "FPS: --";
 
-        // Настраиваем позицию и размер (левый нижний угол с отступом)
-        rectTransform.anchorMin = new Vector2(0, 0);
-        rectTransform.anchorMax = new Vector2(0, 0);
-        rectTransform.pivot = new Vector2(0, 0);
-        rectTransform.anchoredPosition = new Vector2(20, 20); // Отступ 20px от края
-        rectTransform.sizeDelta = new Vector2(200, 50);
+        // Закрепляем счётчик в правом верхнем углу с отступом от краёв экрана.
+        RectTransform rectTransform = fpsText.rectTransform;
+        rectTransform.anchorMin = Vector2.one;
+        rectTransform.anchorMax = Vector2.one;
+        rectTransform.pivot = Vector2.one;
+        rectTransform.anchoredPosition = new Vector2(-20f, -20f);
+        rectTransform.sizeDelta = new Vector2(240f, 60f);
     }
 }
