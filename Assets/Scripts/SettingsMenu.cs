@@ -1,51 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Для загрузки сцен
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// XML комментарий - описание класса для документации
-/// 
-/// Управляет меню настроек - обрабатывает клики на кнопку "Return to Main Menu"
-/// Это очень простой скрипт с одним методом
+/// Settings menu controller. Provides a method to return to the main menu.
 /// </summary>
 
 public class SettingsMenu : MonoBehaviour
 {
     private const string MainMenuSceneName = "0-MainScence";
-
-    // ===== МЕТОДЫ =====
-    
-    // ===== МЕТОД RETURNTOMAINMENU =====
-    // public - метод виден в Inspector и может быть привязан к кнопке UI
-    // void - метод ничего не возвращает (процедура)
-    
-    // Этот метод вызывается при нажатии кнопки "Return" в меню настроек
     public void ReturnToMainMenu()
     {
-        // SceneManager.LoadScene() загружает сцену по имени
-        // Это вернёт игрока на главное меню
         SceneManager.LoadScene(MainMenuSceneName);
     }
-    
-    // ===== СПРАВКА =====
-    // Это один из самых простых скриптов - всего один метод!
-    // В реальных проектах меню может быть намного сложнее:
-    // - Анимации входа/выхода меню
-    // - Сохранение настроек на диск
-    // - Эффекты звука при клике
-    // - Подтверждение перед выходом и т.д.
 }
-
-// ===== СРАВНЕНИЕ СКРИПТОВ =====
-// 
-// SettingsMenu.cs - 1 метод (самый простой)
-// MainMenu.cs - 3 метода (простой)
-// FPSToggleManager.cs - Singleton паттерн с событиями (сложный)
-// FPSCounter.cs - Управление UI, подсчёт FPS (средний)
-// FlyingController.cs - Физика, ввод, вращение (самый сложный)
-//
-// Если вы начинающий, рекомендуем изучать скрипты в таком порядке:
-// 1. SettingsMenu - простейший класс
-// 2. MainMenu - базовые методы
-// 3. FPSCounter - работа с UI и расчёты
-// 4. FlyingController - физика и математика
-// 5. FPSToggleManager - паттерны и события
