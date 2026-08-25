@@ -1,8 +1,14 @@
+#nullable enable
+
 using UnityEngine;
 
+/// <summary>
+/// Applies a specified material to all child Renderers in the hierarchy.
+/// Can be triggered manually via the context menu in the Inspector.
+/// </summary>
 public class ApplyMaterialToHierarchy : MonoBehaviour
 {
-    [SerializeField] private Material materialToApply; // Сюда перетащите ваш серебряный материал
+    [SerializeField] private Material? materialToApply;
 
     [ContextMenu("Apply Material To Children")]
     private void ApplyMaterial()
@@ -13,7 +19,6 @@ public class ApplyMaterialToHierarchy : MonoBehaviour
             return;
         }
 
-        // Находим все компоненты Renderer на родителе И на ВСЕХ его детях
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
         if (renderers.Length == 0)
@@ -22,7 +27,6 @@ public class ApplyMaterialToHierarchy : MonoBehaviour
             return;
         }
 
-        // Проходим по каждому найденному рендереру и назначаем материал
         foreach (Renderer rend in renderers)
         {
             rend.material = materialToApply;
