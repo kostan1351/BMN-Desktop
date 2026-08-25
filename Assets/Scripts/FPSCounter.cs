@@ -106,13 +106,7 @@ public class FPSCounter : MonoBehaviour
     private void CreateFPSText()
     {
         // Ищем первый активный Canvas в сцене
-        Canvas canvas = FindFirstObjectByType<Canvas>();
-
-        if (canvas == null)
-        {
-            Debug.LogWarning("Canvas не найден в сцене. FPS Counter не будет создан.");
-            return;
-        }
+        Canvas canvas = FindAnyObjectByType<Canvas>();
 
         // Создаём новый объект
         GameObject fpsObject = new GameObject("FPSCounter_Object");

@@ -21,8 +21,6 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Debug.Log($"Курсор: {Cursor.lockState}");
-        Debug.Log($"Видимость курсора: {Cursor.visible}");
     }
     
     // ===== МЕТОД STARTGAME =====
